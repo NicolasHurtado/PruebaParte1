@@ -1,3 +1,4 @@
+from dinastias import Dinastia
 from soldados import Soldado
 from gemas import Gema
 from armas import Arma
@@ -11,7 +12,8 @@ Escoja una opción:
     2)Agregar Gema.
     3)Agregar Arma.
     4)Agregar Dinastía.
-    5)Salir.
+    5)Agregar Posicion en la formacion del ejercito.
+    6)Salir.
 
 Utilize el numero correspondiente para seleccionar la accion.
 > '''
@@ -47,8 +49,7 @@ while True:
 
         while True:
             na = input("Numero de armas: ")
-            n = int(na)
-            if na.isnumeric and n>0:
+            if na.isnumeric() and int(na)>0:
                 print("".center(50,"-"))
                 for j in range(1,n+1):
                     arma = input(f"Arma #{j} de tipo {soldado.tipoarma}: ")
@@ -129,7 +130,6 @@ while True:
             with open(f"{dir_act}/bd/gemas/gemasinfo.json","r") as j:
                 data = json.load(j)
 
-            print(data)
             data['gemas'].append({
             'tipo': gema.tipo,
             'poder': gema.poder,
@@ -178,8 +178,7 @@ while True:
     elif opcion == '3':
         print("Ha seleccionado la opcion 3.")
         print("".center(50,"-"))
-
-        #def __init__(self, nombre, poder, posicion):        
+     
         tipo = input(f"Ingrese el tipo de arma: ")
         nombre = input(f"Ingrese el nombre del arma: ")
         poder = input(f"Ingrese el poder del arma: ")
@@ -193,8 +192,8 @@ while True:
             with open(f"{dir_act}/bd/arma/armasinfo.json","r") as j:
                 data = json.load(j)
 
-            print(data)
             data['armas'].append({
+            'tipo': tipo,
             'nombre': arma.nombre,
             'poder': arma.poder,
             'posicion': arma.posicion 
@@ -208,6 +207,7 @@ while True:
             
             #Agrega las armas con sus detalles al diccionario
             armas['armas'].append({
+            'tipo': tipo,
             'nombre': arma.nombre,
             'poder': arma.poder,
             'posicion': arma.posicion 
@@ -225,7 +225,6 @@ while True:
             with open(f"{dir_act}/bd/arma/{tipo}/armasinfo.json","r") as j:
                 data = json.load(j)
 
-            print(data)
             data['armas'].append({
             'nombre': arma.nombre,
             'poder': arma.poder,
@@ -251,8 +250,89 @@ while True:
 
         print("".center(50,"-"))
     elif opcion == '4':
-        pass
+        print("Ha seleccionado la opcion 4.")
+        print("".center(50,"-"))
+
+        nombre = input(f"Ingrese el nombre de la dinastía: ")
+        
+        dinastia = Dinastia(nombre)
+        
+        while True:
+            n = input(f"Cantidad de Posiciones de la dinastía {dinastia.nombre}: ")
+            if n.isnumeric() and int(n)>0:
+                print("".center(50,"-"))
+                for j in range(1,int(n)+1):
+                    while True:
+                        pos = input(f"Posicion #{j} de la dinastía {dinastia.nombre}: ")
+                        if pos.isnumeric() and int(pos)>=0:
+                            posi = int(pos)
+                            pod = input(f"Suma total del poder de la dinastía {dinastia.nombre} en la posicion {pos}:  ")
+                            if pod.isnumeric() and int(pod)>=0:
+                                podf = int(pod)
+                                trupla = (posi,podf)
+                                dinastia.poderes.append(trupla)
+                                print("".center(50,"-"))
+                                break
+                            else:
+                                print("\nLa suma total del poder debe ser un numero mayor o igual a 0\n")
+                        else:
+                            print("La posicion debe ser un numero entero mayor o igual a 0")
+                print("".center(50,"-"))
+                break
+            elif n==0:
+                print("Debes tener almenos una posicion para la dinastía")
+            else:
+                print("Entrada no valida")
+
+        print(dinastia.poderes)
+        dir =  f"{dir_act}/bd/arma"
+        filename = "dinastiasinfo.json"
+        if os.path.exists(f"{dir_act}/bd/arma/dinastiasinfo.json"):
+            with open(f"{dir_act}/bd/arma/dinastiasinfo.json","r") as j:
+                data = json.load(j)
+
+            data['dinastias'].append({
+            'nombre': dinastia.nombre,
+            'poder': [x for x in  dinastia.poderes]
+            })
+ 
+            with open(os.path.join(dir,filename), 'w') as file:
+                json.dump(data, file, indent=4)
+        else:
+            dinastias = {}
+            dinastias['dinastias'] = []
+            
+            #Agrega las dinastias con sus detalles al diccionario
+            dinastias['dinastias'].append({
+            'nombre': dinastia.nombre,
+            'poder': [x for x in  dinastia.poderes]
+            })
+            #Se define la ruta donde se creará el json
+              
+            with open(os.path.join(dir,filename), 'w') as file:
+                json.dump(dinastias, file, indent=4)
+            
+        
+        dir =  f"{dir_act}/bd/arma/{dinastia.nombre}"
+        filename = f"{dinastia.nombre}info.json"
+        
+        dinastias = {}
+        dinastias['dinastias'] = []
+        
+        #Agrega las dinastias con sus detalles al diccionario
+        dinastias['dinastias'].append({
+            'nombre': dinastia.nombre,
+            'poder': [x for x in  dinastia.poderes]
+            })
+        #Se define la ruta donde se creará el json
+        os.makedirs(f"{dir_act}/bd/arma/{dinastia.nombre}", exist_ok=True)  
+        with open(os.path.join(dir,filename), 'w') as file:
+            json.dump(dinastias, file, indent=4)
+
+        print("".center(50,"-"))
     elif opcion == '5':
+        pass
+    elif opcion == '6':
         print("Hasta pronto")
         break
     else:
