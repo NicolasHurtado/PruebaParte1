@@ -10,7 +10,7 @@ Escoja una opción:
     1)Agregar un Soldado.
     2)Agregar Gema.
     3)Agregar Arma.
-    4)Agregar Dinastia.
+    4)Agregar Dinastía.
     5)Salir.
 
 Utilize el numero correspondiente para seleccionar la accion.
@@ -250,7 +250,8 @@ while True:
                 json.dump(armas, file, indent=4)
 
         print("".center(50,"-"))
-
+    elif opcion == '4':
+        pass
     elif opcion == '5':
         print("Hasta pronto")
         break
