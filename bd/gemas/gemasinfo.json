@@ -1,0 +1,14 @@
+{
+    "gemas": [
+        {
+            "tipo": "Flush",
+            "poder": "Fuerza",
+            "tipoarma": "Espadas"
+        },
+        {
+            "tipo": "Gryps",
+            "poder": "Velocidad",
+            "tipoarma": "Martillos"
+        }
+    ]
+}

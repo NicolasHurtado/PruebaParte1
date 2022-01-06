@@ -1,0 +1,14 @@
+{
+    "armas": [
+        {
+            "nombre": "Samurai",
+            "poder": "Fuerza",
+            "posicion": "Parado"
+        },
+        {
+            "nombre": "Corta Craneos",
+            "poder": "Rapidez",
+            "posicion": "Sentado"
+        }
+    ]
+}
