@@ -1,0 +1,31 @@
+{
+    "soldados": [
+        {
+            "apodo": "BUNAK",
+            "gemas": [
+                "Flush",
+                "Gryps"
+            ],
+            "tipoarma": "Lanzas",
+            "armas": [
+                "Arco",
+                "Arco Pro 2.0"
+            ],
+            "ubicacion": "11",
+            "dinastia": "flutter"
+        },
+        {
+            "apodo": "JHOJAN",
+            "gemas": [
+                "Perls"
+            ],
+            "tipoarma": "Espadas",
+            "armas": [
+                "Samurai",
+                "Corta Craneos"
+            ],
+            "ubicacion": "3",
+            "dinastia": "java"
+        }
+    ]
+}

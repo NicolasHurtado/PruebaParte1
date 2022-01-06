@@ -10,19 +10,20 @@ class Soldado:
         self.dinastia=dinastia
 
         if self.gemas == True:
-            n = int(input("Numero de gemas: "))
-            for i in range(1,n+1):
-                gema = input(f"Gema #{i}: ")
-                self.gem_name.append(gema)
+            while True:
+                ng = input("\nNumero de gemas: ")
+                n = int(ng)
+                if ng.isnumeric() and n>0:
+                    print("".center(50,"-"))
+                    for i in range(1,n+1):
+                        gema = input(f"Gema #{i}: ")
+                        self.gem_name.append(gema)
+                    print("".center(50,"-"))
+                    break
+                else:
+                    print("La entrada debe ser un numero entero mayor a 0")
         
-        n = int(input("Numero de armas: "))
-
-        if n>0:
-            for i in range(1,n+1):
-                    arma = input(f"Arma #{i} de tipo {self.tipoarma}: ")
-                    self.armas_name.append(arma)
-        else:
-            pass
+        
                 
 
     def __str__(self):

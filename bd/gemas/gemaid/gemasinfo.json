@@ -1,0 +1,19 @@
+{
+    "gemas": [
+        {
+            "tipo": "Garyx",
+            "poder": "Fuerza",
+            "tipoarma": "Espadas"
+        },
+        {
+            "tipo": "Haryux",
+            "poder": "Vision",
+            "tipoarma": "Martillos"
+        },
+        {
+            "tipo": "Privyx",
+            "poder": "Agilidad",
+            "tipoarma": "Mazos"
+        }
+    ]
+}
