@@ -1,0 +1,14 @@
+{
+    "Lanzas": [
+        {
+            "nombre": "Arca de Noe",
+            "poder": "Vision",
+            "posicion": 44
+        },
+        {
+            "nombre": "Arco",
+            "poder": "30",
+            "posicion": 14
+        }
+    ]
+}

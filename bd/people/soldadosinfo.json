@@ -1,0 +1,31 @@
+{
+    "soldados": [
+        {
+            "apodo": "JHOJAN",
+            "poseegemas": false,
+            "gemas": [],
+            "tipoarma": "Espadas",
+            "armas": [
+                "Samu",
+                "Katana"
+            ],
+            "ubicacion": 12,
+            "dinastia": "java"
+        },
+        {
+            "apodo": "BUNAK",
+            "poseegemas": true,
+            "gemas": [
+                "Haryxs",
+                "Pronex"
+            ],
+            "tipoarma": "Lanzas",
+            "armas": [
+                "Arco",
+                "Tijereta"
+            ],
+            "ubicacion": 28,
+            "dinastia": "flutter"
+        }
+    ]
+}

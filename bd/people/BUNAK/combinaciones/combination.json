@@ -1,0 +1,19 @@
+{
+    "combinaciones": [
+        {
+            "apodo": "BUNAK",
+            "poseegemas": true,
+            "gemas": [
+                "Haryxs",
+                "Pronex"
+            ],
+            "tipoarma": "Lanzas",
+            "armas": [
+                "Arco",
+                "Tijereta"
+            ],
+            "ubicacion": 28,
+            "dinastia": "flutter"
+        }
+    ]
+}

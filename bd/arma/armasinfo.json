@@ -1,0 +1,16 @@
+{
+    "armas": [
+        {
+            "tipo": "Lanzas",
+            "nombre": "Arca de Noe",
+            "poder": "Vision",
+            "posicion": 44
+        },
+        {
+            "tipo": "Lanzas",
+            "nombre": "Arco",
+            "poder": "30",
+            "posicion": 14
+        }
+    ]
+}
