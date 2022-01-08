@@ -1,8 +1,24 @@
 {
     "posiciones": [
         {
-            "posicion": 22,
-            "poder": 220
+            "posicion": 2,
+            "poder": 17
+        },
+        {
+            "posicion": 4,
+            "poder": 52
+        },
+        {
+            "posicion": 5,
+            "poder": -10
+        },
+        {
+            "posicion": 3,
+            "poder": -6
+        },
+        {
+            "posicion": 1,
+            "poder": -2
         }
     ]
 }

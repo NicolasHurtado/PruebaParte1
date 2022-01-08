@@ -1,9 +1,29 @@
 {
     "gemas": [
         {
-            "tipo": "Flush",
-            "poder": "24",
+            "tipo": "Onepiece",
+            "poder": 263,
+            "tipoarma": "Espadas"
+        },
+        {
+            "tipo": "Hache",
+            "poder": 346,
             "tipoarma": "Lanzas"
+        },
+        {
+            "tipo": "Callisto",
+            "poder": 191,
+            "tipoarma": "Cuchillos"
+        },
+        {
+            "tipo": "Backaid",
+            "poder": 430,
+            "tipoarma": "Martillos"
+        },
+        {
+            "tipo": "Kaminari",
+            "poder": 482,
+            "tipoarma": "Espadas"
         }
     ]
 }

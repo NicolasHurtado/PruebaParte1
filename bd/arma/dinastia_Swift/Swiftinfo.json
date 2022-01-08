@@ -1,15 +1,15 @@
 {
-    "Java": [
+    "Swift": [
         {
-            "nombre": "Java",
+            "nombre": "Swift",
             "poder": [
                 [
-                    3,
-                    45
+                    2,
+                    61
                 ],
                 [
-                    4,
-                    52
+                    5,
+                    47
                 ]
             ]
         }

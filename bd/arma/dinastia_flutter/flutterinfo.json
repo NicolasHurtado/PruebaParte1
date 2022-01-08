@@ -1,15 +1,19 @@
 {
-    "flutter": [
+    "Flutter": [
         {
-            "nombre": "flutter",
+            "nombre": "Flutter",
             "poder": [
                 [
-                    12,
-                    120
+                    1,
+                    14
                 ],
                 [
-                    10,
-                    100
+                    2,
+                    28
+                ],
+                [
+                    5,
+                    32
                 ]
             ]
         }

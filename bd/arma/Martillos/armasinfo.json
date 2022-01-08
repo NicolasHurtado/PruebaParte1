@@ -1,0 +1,14 @@
+{
+    "Martillos": [
+        {
+            "nombre": "Nylon",
+            "poder": 462,
+            "posicion": 1
+        },
+        {
+            "nombre": "Chapista",
+            "poder": 164,
+            "posicion": 4
+        }
+    ]
+}

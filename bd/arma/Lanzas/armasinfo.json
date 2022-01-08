@@ -1,14 +1,14 @@
 {
     "Lanzas": [
         {
-            "nombre": "Arca de Noe",
-            "poder": "Vision",
-            "posicion": 44
+            "nombre": "Dardo",
+            "poder": 78,
+            "posicion": 3
         },
         {
-            "nombre": "Arco",
-            "poder": "30",
-            "posicion": 14
+            "nombre": "Azcon",
+            "poder": 86,
+            "posicion": 5
         }
     ]
 }

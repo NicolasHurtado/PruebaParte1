@@ -2,15 +2,51 @@
     "armas": [
         {
             "tipo": "Lanzas",
-            "nombre": "Arca de Noe",
-            "poder": "Vision",
-            "posicion": 44
+            "nombre": "Dardo",
+            "poder": 78,
+            "posicion": 3
         },
         {
             "tipo": "Lanzas",
-            "nombre": "Arco",
-            "poder": "30",
-            "posicion": 14
+            "nombre": "Azcon",
+            "poder": 86,
+            "posicion": 5
+        },
+        {
+            "tipo": "Cuchillos",
+            "nombre": "Daga",
+            "poder": 120,
+            "posicion": 1
+        },
+        {
+            "tipo": "Cuchillos",
+            "nombre": "Bowie",
+            "poder": 252,
+            "posicion": 3
+        },
+        {
+            "tipo": "Martillos",
+            "nombre": "Nylon",
+            "poder": 462,
+            "posicion": 1
+        },
+        {
+            "tipo": "Martillos",
+            "nombre": "Chapista",
+            "poder": 164,
+            "posicion": 4
+        },
+        {
+            "tipo": "Espadas",
+            "nombre": "Samurai",
+            "poder": 637,
+            "posicion": 2
+        },
+        {
+            "tipo": "Espadas",
+            "nombre": "Katana",
+            "poder": 382,
+            "posicion": 1
         }
     ]
 }

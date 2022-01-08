@@ -1,28 +1,45 @@
 {
     "dinastias": [
         {
-            "nombre": "java",
+            "nombre": "Java",
             "poder": [
                 [
-                    11,
-                    110
+                    3,
+                    45
                 ],
                 [
-                    24,
-                    240
+                    4,
+                    52
                 ]
             ]
         },
         {
-            "nombre": "flutter",
+            "nombre": "Flutter",
             "poder": [
                 [
-                    12,
-                    120
+                    1,
+                    14
                 ],
                 [
-                    10,
-                    100
+                    2,
+                    28
+                ],
+                [
+                    5,
+                    32
+                ]
+            ]
+        },
+        {
+            "nombre": "Swift",
+            "poder": [
+                [
+                    2,
+                    61
+                ],
+                [
+                    5,
+                    47
                 ]
             ]
         }

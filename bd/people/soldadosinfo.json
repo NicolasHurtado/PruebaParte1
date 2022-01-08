@@ -1,31 +1,43 @@
 {
     "soldados": [
         {
-            "apodo": "JHOJAN",
-            "poseegemas": false,
-            "gemas": [],
-            "tipoarma": "Espadas",
-            "armas": [
-                "Samu",
-                "Katana"
-            ],
-            "ubicacion": 12,
-            "dinastia": "java"
-        },
-        {
-            "apodo": "BUNAK",
+            "apodo": "Nicolas",
             "poseegemas": true,
             "gemas": [
-                "Haryxs",
-                "Pronex"
+                "Onepiece",
+                "Kaminari"
             ],
+            "tipoarma": "Espadas",
+            "armas": [
+                "Samurai"
+            ],
+            "ubicacion": 4,
+            "dinastia": "Flutter"
+        },
+        {
+            "apodo": "David",
+            "poseegemas": false,
+            "gemas": [],
             "tipoarma": "Lanzas",
             "armas": [
-                "Arco",
-                "Tijereta"
+                "Azcon",
+                "Dardo"
             ],
-            "ubicacion": 28,
-            "dinastia": "flutter"
+            "ubicacion": 5,
+            "dinastia": "Swift"
+        },
+        {
+            "apodo": "Jhojan",
+            "poseegemas": true,
+            "gemas": [
+                "Callisto"
+            ],
+            "tipoarma": "Cuchillos",
+            "armas": [
+                "Daga"
+            ],
+            "ubicacion": 1,
+            "dinastia": "Java"
         }
     ]
 }

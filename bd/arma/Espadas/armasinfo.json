@@ -1,0 +1,14 @@
+{
+    "Espadas": [
+        {
+            "nombre": "Samurai",
+            "poder": 637,
+            "posicion": 2
+        },
+        {
+            "nombre": "Katana",
+            "poder": 382,
+            "posicion": 1
+        }
+    ]
+}

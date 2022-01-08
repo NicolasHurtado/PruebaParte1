@@ -1,0 +1,14 @@
+{
+    "Cuchillos": [
+        {
+            "nombre": "Daga",
+            "poder": 120,
+            "posicion": 1
+        },
+        {
+            "nombre": "Bowie",
+            "poder": 252,
+            "posicion": 3
+        }
+    ]
+}

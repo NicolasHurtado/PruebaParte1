@@ -8,11 +8,11 @@ import os
 dir_act = os.path.abspath(os.path.dirname(__file__))
 menu ='''
 Escoja una opción:
-    1)Agregar un Soldado.
-    2)Agregar Gema.
-    3)Agregar Arma.
-    4)Agregar Dinastía.
-    5)Agregar Posicion en la formacion del ejercito.
+    1)Agregar o Editar Soldado.
+    2)Agregar o Editar Gema.
+    3)Agregar o Editar Arma.
+    4)Agregar o Editar Dinastía.
+    5)Agregar o Editar Posicion en la formacion del ejercito.
     6)Salir.
 
 Utilize el numero correspondiente para seleccionar la accion.
@@ -32,14 +32,34 @@ while True:
         
         armas_name = []
         gem_name = []
-        apodo = input(f"Ingrese el Apodo del soldado : ")
-        tipoarma = input("Tipo de arma (Cuchillos, Lanzas, Martillos, Espadas): ")
-        ubicacion = input("Ubicacion en la formación (1...n): ")
-        dinastia = input("Dinastía (swift, flutter, java): ")
+        apodo = input(f"Ingrese el Apodo del soldado : ").capitalize()
+        while True:
+            tipoarma = input("Tipo de arma (Cuchillos, Lanzas, Martillos, Espadas): ").capitalize()
+            if tipoarma=="Cuchillos" or tipoarma=="Lanzas" or tipoarma=="Martillos" or tipoarma=="Espadas":
+                break
+            else:
+                print("\nTipo de arma no valida.\n")
+        
+        while True:
+            try:
+                ubicacion = int(input("Ubicacion en la formación (1...n): "))
+                if ubicacion>=0:
+                    break
+                else:
+                    print("\nNo puede ser un numero negativo.\n")
+            except:
+                print("\nLa ubicacion debe ser un numero entero mayor o igual a 0.\n")
+
+        while True:
+            dinastia = input("Dinastía (swift, flutter, java): ").capitalize()
+            if dinastia=="Swift" or dinastia=="Flutter" or dinastia=="Java":
+                break
+            else:
+                print("\nDinastia no valida.\n")
         #Valida si la entrada es valida
         while True:
-            gem = input("Posee gemas? (si/no): ")
-            if gem == "si":
+            gem = input("Posee gemas? (Si/No): ").capitalize()
+            if gem == "Si":
                 gems=True
                 while True:
                     try:
@@ -47,14 +67,19 @@ while True:
                         n = int(ng)
                         print("".center(50,"-"))
                         for i in range(1,n+1):
-                            gema = input(f"Gema #{i}: ")
+                            while True:
+                                gema = input(f"Gema #{i} (Onepiece, Hache, Callisto, Backaid, Kaminari): ").capitalize()
+                                if gema=="Onepiece" or gema=="Hache" or gema=="Callisto" or gema=="Backaid" or gema=="Kaminari":
+                                    break
+                                else:
+                                    print("\nGema no valida.\n")
                             gem_name.append(gema)
                         print("".center(50,"-"))
                         break
                     except:
                         print("La entrada debe ser un numero entero mayor a 0")
                 break
-            elif gem == "no":
+            elif gem == "No":
                 gems=False
                 break
             else:
@@ -66,7 +91,7 @@ while True:
                 if n>0:
                     print("".center(50,"-"))
                     for j in range(1,n+1):
-                        arma = input(f"Arma #{j} de tipo {tipoarma}: ")
+                        arma = input(f"Arma #{j} de tipo {tipoarma}: ").capitalize()
                         armas_name.append(arma)
                     print("".center(50,"-"))
                     break
@@ -82,9 +107,10 @@ while True:
 
             
             #Recorre la data, si encuentra un soldado que ya esté creado, lo elimina y lo vuelve a crear para no duplicar el registro
-            for i in range(len(data)):
+            for i in range(len(data["soldados"])):
                 if data["soldados"][i]["apodo"]==apodo:
                     del data["soldados"][i]
+                    break
                 else:
                     pass
             
@@ -94,7 +120,7 @@ while True:
                 'gemas': [x for x in  gem_name],
                 'tipoarma': tipoarma,
                 'armas': [x for x in  armas_name],
-                'ubicacion': int(ubicacion),
+                'ubicacion': ubicacion,
                 'dinastia': dinastia 
                 })
             with open(os.path.join(dir,filename), 'w') as file:
@@ -110,15 +136,21 @@ while True:
             'gemas': [x for x in  gem_name],
             'tipoarma': tipoarma,
             'armas': [x for x in  armas_name],
-            'ubicacion': int(ubicacion),
+            'ubicacion': ubicacion,
             'dinastia': dinastia 
             })
             #Se define la ruta donde se creará el json  
             with open(os.path.join(dir,filename), 'w') as file:
                 json.dump(soldados, file, indent=4)
 
-        #Se crea el diccionario para las gemas por soldado si posee gemas
+        
+        #Se crearán las combinaciones de los poderes del soldado
+        combinaciones = {}
+        combinaciones["combinaciones"] = []
+
         if gems==True:
+
+            #Se crea el diccionario para las gemas por soldado si posee gemas
             gemas = {}
             gemas[f'{apodo}'] = []
             
@@ -135,38 +167,155 @@ while True:
                 json.dump(gemas, file, indent=4)
             
 
-        #Se crearán las combinaciones de los poderes del soldado
+            
 
-        
-        combinaciones = {}
-        combinaciones['combinaciones'] = []
-        
-        #Agrega los soldados con sus detalles al diccionario
-        combinaciones['combinaciones'].append({
-        'apodo': apodo,
-        'poseegemas': gems,
-        'gemas': [x for x in  gem_name],
-        'tipoarma': tipoarma,
-        'armas': [x for x in  armas_name],
-        'ubicacion': int(ubicacion),
-        'dinastia': dinastia 
-        })
-        #Se define la ruta donde se creará el json
-        os.makedirs(f"{dir_act}/bd/people/{apodo}/combinaciones", exist_ok=True)
-        dir =  f"{dir_act}/bd/people/{apodo}/combinaciones"
-        filename = "combination.json"   
-        with open(os.path.join(dir,filename), 'w') as file:
-            json.dump(combinaciones, file, indent=4)
-        
+            #Recorre el arreglo de gemas
+            for gema in gem_name:
+                #Abre el json donde está la info de las gemas
+                dir =  f"{dir_act}/bd/gemas"
+                filename = "gemasinfo.json"
+                with open(f"{dir}/{filename}","r") as j:
+                    datagemas = json.load(j)
+                for i in range(len(datagemas["gemas"])):
+                    if datagemas["gemas"][i]["tipo"]==gema:
+                        podgema = datagemas["gemas"][i]["poder"]
+                        break
+                    else:
+                        podgema=0
+
+                #Recorre el arreglo de armas
+                for arma in armas_name:
+                    #Abre el json donde está la info de las armas
+                    dir =  f"{dir_act}/bd/arma"
+                    filename = "armasinfo.json"
+                    with open(f"{dir}/{filename}","r") as j:
+                        dataarmas = json.load(j)
+                    for i in range(len(dataarmas["armas"])):
+                        if dataarmas["armas"][i]["nombre"]==arma:
+                            podarma = dataarmas["armas"][i]["poder"]
+                            break
+                        else:
+                            podarma = 0
+                    
+                    #Abre el json donde está la info de las posiciones
+                    dir =  f"{dir_act}/bd/arma"
+                    filename = "positioninfo.json"
+                    with open(f"{dir}/{filename}","r") as j:
+                        datapos = json.load(j)
+                    for i in range(len(datapos["posiciones"])):
+                        if datapos["posiciones"][i]["posicion"]==ubicacion:
+                            podpos = datapos["posiciones"][i]["poder"]
+                            break
+                        else:
+                            podpos=0
+
+                    #Abre el json donde está la info de las dinastias
+                    dir =  f"{dir_act}/bd/arma"
+                    filename = "dinastiasinfo.json"
+                    with open(f"{dir}/{filename}","r") as j:
+                        datadinas = json.load(j)
+
+                    for i in range(len(datadinas["dinastias"])):
+                        if datadinas["dinastias"][i]["nombre"]==dinastia:
+                            for poder in datadinas["dinastias"][i]["poder"]:
+                                poddinas = poder[1] 
+                                print(f"Poder dinastia: {poddinas}")
+                                combinaciones["combinaciones"].append({
+                                    f"{arma},{str(ubicacion)},{gema},{dinastia}":(podarma+podpos+podgema+poddinas)
+                                })   
+                        else:
+                            pass
+            #Se define la ruta donde se creará el json
+            os.makedirs(f"{dir_act}/bd/people/{apodo}/combinaciones", exist_ok=True)  
+            dir =  f"{dir_act}/bd/people/{apodo}/combinaciones"
+            filename = "combination.json" 
+
+            with open(os.path.join(dir,filename), 'w') as file:
+                json.dump(combinaciones, file, indent=4)       
+        else:
+            #Recorre el arreglo de armas
+            podgema = 0
+            for arma in armas_name:
+                #Abre el json donde está la info de las armas
+                dir =  f"{dir_act}/bd/arma"
+                filename = "armasinfo.json"
+                with open(f"{dir}/{filename}","r") as j:
+                    dataarmas = json.load(j)
+                for i in range(len(dataarmas["armas"])):
+                    if dataarmas["armas"][i]["nombre"]==arma:
+                        podarma = dataarmas["armas"][i]["poder"]
+                        break
+                    else:
+                        podarma = 0
+                
+                #Abre el json donde está la info de las posiciones
+                dir =  f"{dir_act}/bd/arma"
+                filename = "positioninfo.json"
+                with open(f"{dir}/{filename}","r") as j:
+                    datapos = json.load(j)
+                for i in range(len(datapos["posiciones"])):
+                    if datapos["posiciones"][i]["posicion"]==ubicacion:
+                        podpos = datapos["posiciones"][i]["poder"]
+                        break
+                    else:
+                        podpos=0
+                print(f"Poder posicion: {podpos}")
+                #Abre el json donde está la info de las dinastias
+                dir =  f"{dir_act}/bd/arma"
+                filename = "dinastiasinfo.json"
+                with open(f"{dir}/{filename}","r") as j:
+                    datadinas = json.load(j)
+
+                for i in range(len(datadinas["dinastias"])):
+                    if datadinas["dinastias"][i]["nombre"]==dinastia:
+                        for poder in datadinas["dinastias"][i]["poder"]:
+                            poddinas = poder[1] 
+                            print(f"Poder dinastia: {poddinas}")
+                            combinaciones["combinaciones"].append({
+                                f"{arma},{str(ubicacion)},{dinastia}":(podarma+podpos+podgema+poddinas)
+                            })   
+                    else:
+                        pass
+            
+            #Se define la ruta donde se creará el json
+            os.makedirs(f"{dir_act}/bd/people/{apodo}/combinaciones", exist_ok=True)  
+            dir =  f"{dir_act}/bd/people/{apodo}/combinaciones"
+            filename = "combination.json" 
+
+            with open(os.path.join(dir,filename), 'w') as file:
+                json.dump(combinaciones, file, indent=4) 
+
         
     elif opcion == '2':
         print("Ha seleccionado la opcion 2.")
         print("".center(50,"-"))
-                
-        tipo = input(f"Ingrese el tipo de la gema: ")
-        poder = input(f"Ingrese el poder de la gema: ")
-        tipoarma = input(f"Tipo de arma valida para la gema: ")
-        #Valida si la entrada es valida
+
+        while True:
+            tipo = input(f"Ingrese el tipo de la gema (Onepiece, Hache, Callisto, Backaid, Kaminari): ").capitalize()
+            if tipo=="Onepiece" or tipo=="Hache" or tipo=="Callisto" or tipo=="Backaid" or tipo=="Kaminari":
+                break
+            else:
+                print("\nTipo de gema no valida.\n")
+                    
+        
+        while True:
+            try:
+                poder = int(input(f"Ingrese el poder de la gema: "))
+                if poder >=0:
+                    break
+                else:
+                   print("\nNo puede ser un numero negativo.\n") 
+            except:
+                print("\nEl poder debe ser un numero entero mayor o igual a 0.\n")
+
+        while True:
+            tipoarma = input("Tipo de arma valida para la gema (Cuchillos, Lanzas, Martillos, Espadas): ").capitalize()
+            if tipoarma=="Cuchillos" or tipoarma=="Lanzas" or tipoarma=="Martillos" or tipoarma=="Espadas":
+                break
+            else:
+                print("\nTipo de arma no valida.\n")
+
+
 
         dir =  f"{dir_act}/bd/gemas"
         filename = "gemasinfo.json"
@@ -175,7 +324,7 @@ while True:
                 data = json.load(j)
             
             #Recorre la data, si encuentra una gema que ya esté creado, la elimina y la vuelve a crear para no duplicar el registro
-            for i in range(len(data)):
+            for i in range(len(data["gemas"])):
                 if data["gemas"][i]["tipo"]==tipo:
                     del data["gemas"][i]
                 else:
@@ -228,11 +377,26 @@ while True:
     elif opcion == '3':
         print("Ha seleccionado la opcion 3.")
         print("".center(50,"-"))
-     
-        tipo = input(f"Ingrese el tipo de arma: ")
-        nombre = input(f"Ingrese el nombre del arma: ")
-        poder = input(f"Ingrese el poder del arma: ")
-        posicion = input(f"Posicion en la que el arma debe ser usada: ")
+
+        while True:
+            tipo = input(f"Ingrese el tipo de arma (Cuchillos, Lanzas, Martillos, Espadas): ").capitalize()
+            if tipo=="Cuchillos" or tipo=="Lanzas" or tipo=="Martillos" or tipo=="Espadas":
+                break
+            else:
+                print("\nTipo de arma no valida.\n")
+        
+        nombre = input(f"Ingrese el nombre del arma: ").capitalize()
+        while True:
+            try:
+                poder = int(input(f"Ingrese el poder del arma: "))
+                posicion = int(input(f"Posicion en la que el arma debe ser usada: "))
+                if poder>=0 and posicion>=0:
+                    print("Arma creada con exito.")
+                    break
+                else:
+                    print("\nPoder o Posicion no pueden ser numeros negativos.\n")
+            except:
+                print("\nEl poder y la posicion deben ser numeros enteros mayores o iguales a 0. \n")
         
         dir =  f"{dir_act}/bd/arma"
         filename = "armasinfo.json"
@@ -241,16 +405,17 @@ while True:
                 data = json.load(j)
 
             #Recorre la data, si encuentra un arma que ya esté creada, la elimina y la vuelve a crear para no duplicar el registro
-            for i in range(len(data)):
+            for i in range(len(data["armas"])):
                 if data["armas"][i]["nombre"]==nombre:
                     del data["armas"][i]
+                    break
                 else:
                     pass
 
             data['armas'].append({
             'tipo': tipo,
             'nombre': nombre,
-            'poder': poder,
+            'poder': int(poder),
             'posicion': int(posicion) 
             })
  
@@ -264,8 +429,8 @@ while True:
             armas['armas'].append({
             'tipo': tipo,
             'nombre': nombre,
-            'poder': poder,
-            'posicion': posicion 
+            'poder': int(poder),
+            'posicion': int(posicion) 
             })
             #Se define la ruta donde se creará el json
               
@@ -281,15 +446,16 @@ while True:
                 data = json.load(j)
 
             #Recorre la data, si encuentra una arma que ya esté creada, la elimina y la vuelve a crear para no duplicar el registro
-            for i in range(len(data)):
+            for i in range(len(data[f'{tipo}'])):
                 if data[f'{tipo}'][i]["nombre"]==nombre:
                     del data[f'{tipo}'][i]
+                    break
                 else:
                     pass
 
             data[f'{tipo}'].append({
             'nombre': nombre,
-            'poder': poder,
+            'poder': int(poder),
             'posicion': int(posicion) 
             })
  
@@ -302,7 +468,7 @@ while True:
             #Agrega las armas con sus detalles al diccionario
             armas[f'{tipo}'].append({
             'nombre': nombre,
-            'poder': poder,
+            'poder': int(poder),
             'posicion': int(posicion) 
             })
             #Se define la ruta donde se creará el json
@@ -316,7 +482,12 @@ while True:
         print("".center(50,"-"))
 
         poderes = []
-        nombre = input(f"Ingrese el nombre de la dinastía: ")
+        while True:
+            nombre = input(f"Ingrese el nombre de la dinastía (swift, flutter, java): ").capitalize()
+            if nombre=="Swift" or nombre=="Flutter" or nombre=="Java":
+                break
+            else:
+                print("\nDinastia no valida.\n")
         
         
         while True:
@@ -353,9 +524,10 @@ while True:
                 data = json.load(j)
 
             #Recorre la data, si encuentra una dinastía que ya esté creada, la elimina y la vuelve a crear para no duplicar el registro
-            for i in range(len(data)):
+            for i in range(len(data["dinastias"])):
                 if data["dinastias"][i]["nombre"]==nombre:
                     del data["dinastias"][i]
+                    break
                 else:
                     pass
 
@@ -404,25 +576,23 @@ while True:
         while True:
             try:
                 pos = int(input(f"Ingrese la posicion en la formacion del ejercito : "))
-                if pos:
+                if pos>=0:
                     print("".center(50,"-"))
                     while True:
                         try:
                             pod = int(input(f"Ingrese la suma del poder de la posicion {pos}: "))
-                            if pod>=0:
+                            if pod:
                                 print("Posicion creada")
                                 break
                         except:
-                            print("La suma del poder debe ser mayor o igual a 0")
+                            print("\nLa suma del poder debe ser un numero entero.\n")
                     print("".center(50,"-"))
                     break
+                else:
+                    print("\nPosicion no puede ser numero negativo.\n")
             except:
-                print("La posicion debe ser un numero entero")
+                print("\nLa posicion debe ser un numero entero.\n")
                 
-
-            
-            
-
         dir =  f"{dir_act}/bd/arma"
         filename = "positioninfo.json"
         if os.path.exists(f"{dir_act}/bd/arma/{filename}"):
@@ -430,9 +600,10 @@ while True:
                 data = json.load(j)
 
             #Recorre la data, si encuentra una posición que ya esté creada, la elimina y la vuelve a crear para no duplicar el registro
-            for i in range(len(data)):
-                if data["posiciones"][i]["posicion"]==pos:
-                    del data["posiciones"][i]
+            for i in range(len(data['posiciones'])):
+                if data['posiciones'][i]['posicion']==pos:
+                    del data['posiciones'][i]
+                    break
                 else:
                     pass
             data['posiciones'].append({
@@ -473,10 +644,7 @@ while True:
             json.dump(posiciones, file, indent=4)
 
     elif opcion == '6':
-        print("Hasta pronto")
+        print("Hasta pronto".center(50,"-"))
         break
     else:
         print("Entrada no valida, digite un numero del menú")
-
-
-

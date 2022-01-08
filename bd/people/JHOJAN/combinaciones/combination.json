@@ -1,16 +1,10 @@
 {
     "combinaciones": [
         {
-            "apodo": "JHOJAN",
-            "poseegemas": false,
-            "gemas": [],
-            "tipoarma": "Espadas",
-            "armas": [
-                "Samu",
-                "Katana"
-            ],
-            "ubicacion": 12,
-            "dinastia": "java"
+            "Daga,1,Callisto,Java": 354
+        },
+        {
+            "Daga,1,Callisto,Java": 361
         }
     ]
 }
