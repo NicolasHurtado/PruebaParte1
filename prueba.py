@@ -1,19 +1,16 @@
-from dinastias import Dinastia
-from soldados import Soldado
-from gemas import Gema
-from armas import Arma
 import json
 import os 
 
 dir_act = os.path.abspath(os.path.dirname(__file__))
 menu ='''
 Escoja una opción:
-    1)Agregar o Editar Soldado.
-    2)Agregar o Editar Gema.
-    3)Agregar o Editar Arma.
-    4)Agregar o Editar Dinastía.
-    5)Agregar o Editar Posicion en la formacion del ejercito.
-    6)Salir.
+    1) Agregar o Editar Soldado.
+    2) Agregar o Editar Gema.
+    3) Agregar o Editar Arma.
+    4) Agregar o Editar Dinastía.
+    5) Agregar o Editar Posicion en la formacion del ejercito.
+    6) Mostrar la combinación con el maximo poder.
+    7) Salir.
 
 Utilize el numero correspondiente para seleccionar la accion.
 > '''
@@ -642,9 +639,87 @@ while True:
         os.makedirs(f"{dir_act}/bd/arma/position{pos}", exist_ok=True)  
         with open(os.path.join(dir,filename), 'w') as file:
             json.dump(posiciones, file, indent=4)
-
     elif opcion == '6':
-        print("Hasta pronto".center(50,"-"))
+        # Se crea un directorio donde se guardará la mejor combinación
+        combinacion = {}
+        combinacion["mejorcombinacion"] = []
+
+        #Abre el json donde está la info de las gemas
+        dir =  f"{dir_act}/bd/gemas"
+        filename = "gemasinfo.json"
+        with open(f"{dir}/{filename}","r") as j:
+            datagemas = json.load(j)
+
+        for i in range(len(datagemas["gemas"])):
+            gema = datagemas["gemas"][i]["tipo"]
+            podgema = datagemas["gemas"][i]["poder"]
+                
+            #Abre el json donde está la info de las armas
+            dir =  f"{dir_act}/bd/arma"
+            filename = "armasinfo.json"
+            with open(f"{dir}/{filename}","r") as j:
+                dataarmas = json.load(j)
+            
+            # Se iteran las armas
+            for i in range(len(dataarmas["armas"])):
+                arma = dataarmas["armas"][i]["nombre"]
+                podarma = dataarmas["armas"][i]["poder"]
+                
+                #Abre el json donde está la info de las posiciones
+                dir =  f"{dir_act}/bd/arma"
+                filename = "positioninfo.json"
+                with open(f"{dir}/{filename}","r") as j:
+                    datapos = json.load(j)
+                
+                # Se iteran las posiciones
+                for i in range(len(datapos["posiciones"])):
+                    ubicacion = datapos["posiciones"][i]["posicion"]
+                    podpos = datapos["posiciones"][i]["poder"]
+
+                    #Abre el json donde está la info de las dinastias
+                    dir =  f"{dir_act}/bd/arma"
+                    filename = "dinastiasinfo.json"
+                    with open(f"{dir}/{filename}","r") as j:
+                        datadinas = json.load(j)
+
+                    # Se iteran las dinastias
+                    for i in range(len(datadinas["dinastias"])):
+                        dinastia = datadinas["dinastias"][i]["nombre"]
+
+                        # Como las dinastias pueden tener varias posiciones entonces se itera la lista de posicion-poder
+                        for poder in datadinas["dinastias"][i]["poder"]:
+                            poddinas = poder[1]
+                            
+                            sumapoder = (podarma+podpos+podgema+poddinas)
+
+                            if combinacion["mejorcombinacion"]:
+                                for i in range(len(combinacion["mejorcombinacion"])):
+                                    # Recorre el diccionario combinacion, accede a su llave valor
+                                    for llave,valor in combinacion["mejorcombinacion"][i].items():
+                                        # Si la suma de los poderes de esta iteración es mayor a la que ya está registrada entonces lo borra y crea uno nuevo
+                                        if sumapoder>valor:
+                                            del combinacion["mejorcombinacion"][i]
+
+                                            combinacion["mejorcombinacion"].append({
+                                                f"{arma},{str(ubicacion)},{gema},{dinastia}": sumapoder
+                                                })
+                                            break                             
+                            else:
+                                combinacion["mejorcombinacion"].append({
+                                f"{arma},{str(ubicacion)},{gema},{dinastia}": sumapoder
+                                })
+        
+        for i in range(len(combinacion["mejorcombinacion"])):
+            for llave,valor in combinacion["mejorcombinacion"][i].items():
+                print("La combinación con el mayor poder es: \n")
+                print(f"'{llave}' con un poder de {valor}" )
+
+    elif opcion == '7':
+        print("\n")
+        print("Programa Finalizado".center(50,"-"))
+        print("Programa Finalizado".center(50,"-"))
+        print("Programa Finalizado".center(50,"-"))
+        print("\n")
         break
     else:
         print("Entrada no valida, digite un numero del menú")
